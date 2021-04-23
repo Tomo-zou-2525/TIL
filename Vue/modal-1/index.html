@@ -1,0 +1,86 @@
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>modalをcomponentで作る</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="openModal">Click</button>
+
+      <open-modal v-show="showContent" v-on:from-child="closeModal"
+        >slotからモーダルウィンドウへ</open-modal
+      >
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- ローカルコンポーネントとして登録 -->
+    <script>
+      // 第一引数にコンポーネント名
+      Vue.component("open-modal", {
+        // HTMLを記述
+        template: `
+    <div id="overlay" v-on:click="clickEvent">
+        <div id="content">
+          <p><slot></slot></p>
+          <button v-on:click="clickEvent">close</button>
+        </div>
+    </div>
+    `,
+        // メソッドを記述
+        methods: {
+          clickEvent: function () {
+            //$emitで"from-child"を親に渡す
+            this.$emit("from-child");
+          },
+        },
+      });
+
+      //Vueインスタンス作成
+      new Vue({
+        el: "#app",
+        // showContentの属性の初期値を無効化
+        data: {
+          showContent: false,
+        },
+        methods: {
+          //showContentプロパティを有効
+          openModal: function () {
+            this.showContent = true;
+          },
+          //showContentプロパティを無効
+          closeModal: function () {
+            this.showContent = false;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  #content {
+    z-index: 10;
+    width: 50%;
+    padding: 1em;
+    background: #fff;
+  }
+
+  #overlay {
+    /*　要素を重ねた時の順番　*/
+
+    z-index: 1;
+
+    /*　画面全体を覆う設定　*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
