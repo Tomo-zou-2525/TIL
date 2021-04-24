@@ -4,34 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
     <title>Fast-Test</title>
   </head>
 
   <body>
-    <div>
-      <div id="app">
-        <h1>使用者一覧</h1>
-        <button>ユーザ登録</button>
-        <table class="table-container" border="1">
-          <thead class="tb-head">
-            <tr>
-              <td>ID</td>
-              <td>Name</td>
-              <td>Email</td>
-              <td>更新</td>
-              <td>削除</td>
-            </tr>
-          </thead>
-          <tbody class="tb-body">
-            <tr>
-              <td>aaaa</td>
-              <td>aaaa</td>
-            </tr>
-          </tbody>
-        </table>
+    <div id="app">
+      <div class="CONTAINER MT-5">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>{{ title }}</h1>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  <th>EMAIL</th>
+                  <th>更新</th>
+                  <th>削除</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in users" v-bind:key="user.id">
+                  <!-- 配列で表示させるのに、HTML要素を絡めるのってどうすんの？ -->
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.address }}</td>
+                  <td>
+                    <button class="btn btn-primary">更新</button>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger">削除</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
   <script src="app.js"></script>
 </html>
