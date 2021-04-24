@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Fast-Test</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Fast-Test</title>
-</head>
-
-<body>
-  <div>
-    <div id="app">
-      <user-list></user-list>
+  <body>
+    <div>
+      <div id="app">
+        <h1>使用者一覧</h1>
+        <button>ユーザ登録</button>
+        <table class="table-container" border="1">
+          <thead class="tb-head">
+            <tr>
+              <td>ID</td>
+              <td>Name</td>
+              <td>Email</td>
+              <td>更新</td>
+              <td>削除</td>
+            </tr>
+          </thead>
+          <tbody class="tb-body">
+            <tr>
+              <td>aaaa</td>
+              <td>aaaa</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-<script src="app.js"></script>
-
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="app.js"></script>
 </html>
