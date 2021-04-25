@@ -96,3 +96,23 @@
 // function カレーライス作る(ライス, カレー) {
 //   return カレー + ライス
 // }
+
+const fetchA = fetch(
+  "https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10"
+).then((r) =>
+  fetch("https://api.jikan.moe/v3/search/anime?q=hokuotnoken%limit=10")
+);
+
+const fetchB = fetch(
+  "https://api.jikan.moe/v3/search/anime?q=papuwakun%limit=10"
+);
+Promise.all([fetchA, fetchB])
+  .then(([hokuto, papuwa]) =>
+    fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10")
+  )
+  .then((jojo) => console.log(jojo));
+
+//110行めの引数は
+//fetchAPIが実行したHTTPリクエストの結果がそれらの変数には代入されてます！
+// 従ってHTTPリクエストの結果を用いて何かを処理する場合は書く必要があります。
+// 使わないなら省略可能です😃
