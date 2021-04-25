@@ -102,7 +102,6 @@ const fetchA = fetch(
 ).then((r) =>
   fetch("https://api.jikan.moe/v3/search/anime?q=hokuotnoken%limit=10")
 );
-
 const fetchB = fetch(
   "https://api.jikan.moe/v3/search/anime?q=papuwakun%limit=10"
 );
