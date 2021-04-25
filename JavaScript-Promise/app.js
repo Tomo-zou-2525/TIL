@@ -39,29 +39,51 @@
 // });
 
 //⑧ ①のAPIでthenチェーンで書いてみよう
-fetch("https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10")
-  .then((res) => console.log(res))
-  .then(() => fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10"))
-  .then((res) => console.log(res));
+// fetch("https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10")
+//   .then((res) => console.log(res))
+//   .then(() => fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10"))
+//   .then((res) => console.log(res));
 
 //⑨thenでつながない場合
-fetch("https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10").then((res) =>
-  console.log(res)
-);
+// fetch("https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10").then((res) =>
+//   console.log(res)
+// );
 
-fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10").then((res) =>
-  console.log(res)
-);
+// fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10").then((res) =>
+//   console.log(res)
+// );
 
 //⑩catch処理を入れる
-fetch("https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10")
-  .then((res) => console.log(res))
-  .then(() => fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10"))
-  .then(() => {
-    throw new Error("強制的にエラー");
+// fetch("https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10")
+//   .then((res) => console.log(res))
+//   .then(() => fetch("https://api.jikan.moe/v3/search/anime?q=jojo%limit=10"))
+//   .then(() => {
+//     throw new Error("強制的にエラー");
+//   })
+//   .then((res) => console.log(res))
+//   .catch((e) => {
+//     console.error(e);
+//     console.log("エラーでっせ");
+//   })
+//   .then(() => {
+//     console.log("続けるよ");
+//   });
+
+//11自分でPromiseオブジェクトを作ってみる
+function makePromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(function () {
+      resolve("成功");
+      console.log("uhouhouhouho");
+      reject("失敗");
+    }, 1000);
+  });
+}
+
+makePromise()
+  .then((res) => {
+    console.log(res);
   })
-  .then((res) => console.log(res))
   .catch((e) => {
-    console.log(e);
-    console.log("エラーでっせ");
+    console.error(e);
   });
