@@ -21,7 +21,16 @@
 
 //⑥定数にPromiseオブジェクトを仕込む
 
-const sleep = fetch(
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+sleep(2000)
+  .then(() => console.log("2second"))
+  .then(() => sleep(1500))
+  .then(() => console.log("1.5second"))
+  .then(() => sleep(3000))
+  .then(() => console.log("3second"))
+  .then(() => sleep(1000))
+  .then(() => console.log("1second"));
 //   "https://api.jikan.moe/v3/search/anime?q=kimetus%limit=10"
 // );
 //⑦.thenメソッドを追加して、コールバック後の処理を記述する
