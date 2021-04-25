@@ -70,20 +70,29 @@
 //   });
 
 //11自分でPromiseオブジェクトを作ってみる
-function makePromise() {
-  return new Promise((resolve, reject) => {
-    setTimeout(function () {
-      resolve("成功");
-      console.log("uhouhouhouho");
-      reject("失敗");
-    }, 1000);
-  });
-}
+// function makePromise() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(function () {
+//       resolve("成功");
+//       console.log("uhouhouhouho");
+//       reject("失敗");
+//     }, 1000);
+//   });
+// }
 
-makePromise()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((e) => {
-    console.error(e);
-  });
+// makePromise()
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((e) => {
+//     console.error(e);
+//   });
+
+//12 Promise.all
+// Promise.all([カレー作る(), ご飯炊く()])
+//95行目のthenが呼ばれるのは、93行目の引数の処理が終わってから行われる
+// .then(([カレー、ライス]) => カレー + ライス)
+
+// function カレーライス作る(ライス, カレー) {
+//   return カレー + ライス
+// }
