@@ -1,65 +1,46 @@
-const 親component = {
-  template: `
-  <div>
-    <h2>子供です</h2>
-    <span v-bind:"props名"=""></span>
-    <input v-on:click=""></input>
-  </div>
-  `
+// async function testAsync() {
+//   return "resolve";
+// }
+
+// async function test() {
+//   //なんかしら
+//   return "resolve!!";
+// }
+// test().then(() => {
+//   setTimeout(console.log("UNKOOOOOO"), 2000);
+// });
+
+function sampleResolve(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(value * 2);
+    }, 2000);
+  });
 }
 
-const 子component = {
-  props: {
-    /*親コンポーネント（UserList）がpropsを参照する時
-    v-bind:user="ユーザーオブジェクト"
-    と記述することになる
-    え、ユーザーオブジェクトってなにかって？
-    自分で作ってもいいし、他にあるやつ使えバカやろー
-     */
-    user: {
-      type: Object
-    }
-  },
-  template: `
-    <div>
-      <h1>propsで渡ってきました</h1>
-      <h2>選択されたユーザー</h2>
-      {{ user.name }}
-    </div>
-  `
-}
+// //関数を定義
+// function sampleResolve(value) {
+//   // 戻り値にPromiseを生成
+//   return new Promise((resolve) => {
+//     // resolveの値として、setTimeoutを仕込む
+//     setTimeout(() => {
+//       //resolveの返り血として、value * 2 した値が返される
+//       resolve(value * 2);
+//       //その発動は2秒後
+//     }, 2000);
+//   });
+// }
 
-const UserList = {
-  components: {
-    'list-title': ListTitle,
-  },
-  data: {
-    users: [
-      { id: 1, name: 'ユーザー１' },
-      { id: 2, name: 'ユーザー2' },
-      { id: 3, name: 'ユーザー3' },
-      { id: 4, name: 'ユーザー4' },
-      { id: 5, name: 'ユーザー5' }
-    ]
-  },
-  template: `
-    <div>
-      <list-title></list-title>
-      <ul>
-        <li v-for="user in users" :key="user.id">
-          {{ user.name }}
-        </li>
-      </ul>
-     </div>
-  `
-}
-
-const vm = new Vue({
-  el: '#app',
-  data: {
-
-  },
-  components: {
-    'user-list': UserList
-  }
-})
+// function doubleReplay(value) {
+//   return new Promise((resolve) => {
+//     setTimeout((resolve(value * 2), 2000));
+//   });
+// }
+// function testTimeout() {
+//   return new Promise((resolve) => {
+//     //処理を書く
+//     setTimeout(() => {
+//       resolve(value * 2);
+//     }, 2000);
+//   });
+// }
