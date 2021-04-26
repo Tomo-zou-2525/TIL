@@ -10,13 +10,13 @@
 //   setTimeout(console.log("UNKOOOOOO"), 2000);
 // });
 
-function sampleResolve(value) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(value * 2);
-    }, 2000);
-  });
-}
+// function sampleResolve(value) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(value * 2);
+//     }, 2000);
+//   });
+// }
 
 // //関数を定義
 // function sampleResolve(value) {
@@ -44,3 +44,20 @@ function sampleResolve(value) {
 //     }, 2000);
 //   });
 // }
+
+function countDouble(value) {
+  return new Promise((response) => {
+    setTimeout(() => {
+      response(value * 2);
+    }, 2000);
+  });
+}
+
+async function sample() {
+  const result = await countDouble(10);
+  return result + 15;
+}
+
+sample().then((response) => {
+  console.log(response);
+});
