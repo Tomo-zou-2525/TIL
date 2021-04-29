@@ -61,3 +61,11 @@ async function sample() {
 sample().then((response) => {
   console.log(response);
 });
+
+function resolveTest(value) {
+  return new Promise((resolve) => {
+    setTimeout(() =>{
+      resolve(value * 2)
+    }, 2000);
+  });
+}
