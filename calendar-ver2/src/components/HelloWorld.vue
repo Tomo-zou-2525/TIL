@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="content">
-      <h2>カレンダー{{ displayDate }}</h2>
-      <div class="button-area">
-        <button @click="setLastMonth" class="button">前の月</button>
-        <button @click="setNextMonth" class="button">次の月</button>
+    <div class="contents">
+      <div id="calendar-header" class="button-area">
+        <span @click="setLastMonth" class="">＜</span>
+        <span>{{ displayDate }}</span>
+        <span @click="setNextMonth" class="">＞</span>
       </div>
 
       <div class="calendar">
@@ -15,14 +15,15 @@
         </div>
         <div
           class="calendar-weekly"
-          v-for="(week, index) in calendars"
-          :key="index"
+          v-for="(week, outsidepass) in calendars"
+          :key="outsidepass"
         >
           <div
             class="calendar-daily"
             :class="{ outside: currentMonth !== day.month }"
-            v-for="(day, index) in week"
-            :key="index"
+            v-for="(day, insidepass) in week"
+            :key="insidepass"
+            v-on:click="dateClick(day)"
           >
             <div class="calendar-day">
               {{ day.day }}
@@ -40,20 +41,21 @@ export default {
   data() {
     return {
       currentDate: moment(),
+      day: "",
     };
   },
   methods: {
     getStartDate() {
       let date = moment(this.currentDate);
       date.startOf("month");
-      const youbiNum = date.day();
-      return date.subtract(youbiNum, "days");
+      const dayOfWeekNum = date.day();
+      return date.subtract(dayOfWeekNum, "days");
     },
     getEndDate() {
       let date = moment(this.currentDate);
       date.endOf("month");
-      const youbiNum = date.day();
-      return date.subtract(youbiNum, "days");
+      const dayOfWeekNum = date.day();
+      return date.subtract(dayOfWeekNum, "days");
     },
     getCalendar() {
       let startDate = this.getStartDate();
@@ -85,6 +87,12 @@ export default {
       const week = ["日", "月", "火", "水", "木", "金", "土"];
       return week[dayIndex];
     },
+    //日付クリック時の処理
+    dateClick: function(day) {
+      if (day !== currentDate) {
+        this.currentDate = day;
+      }
+    },
   },
   computed: {
     calendars() {
@@ -107,45 +115,58 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.content {
+.contents {
   margin: 2em auto;
-  width: 900px;
+  width: 100％;
+}
+#calendar-header {
+  font-size: 1.7rem;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  background-color: darkorange;
+  border-bottom: 0.08rem solid #ddd;
+  display: flex;
+  justify-content: space-between;
+}
+#calendar-header span {
+  padding: 1.07rem 1.42rem;
+  color: white;
+  display: inline-block;
 }
 .button-area {
   margin: 0.5em 0;
 }
 .button {
-  padding: 4px 8px;
-  margin-right: 8px;
+  padding: 0.3rem 0.57rem;
+  margin-right: 0.57rem;
 }
 .calendar {
-  max-width: 900px;
-  border-top: 1px solid #e0e0e0;
+  border-top: 0.07rem solid #e0e0e0;
   font-size: 0.8em;
 }
 .calendar-weekly {
   display: flex;
-  border-left: 1px solid #e0e0e0;
-  /* background-color: black; */
+  border-left: 0.07rem solid #e0e0e0;
 }
 .calendar-weekday {
   flex: 1;
-  border-bottom: 1px solid #e0e0e0;
-  border-right: 1px solid #e0e0e0;
-  margin-right: -1px;
+  border-bottom: 0.07rem solid #e0e0e0;
+  border-right: 0.07rem solid #e0e0e0;
+  margin-right: -0.07rem;
   text-align: center;
 }
 .calendar-daily {
   flex: 1;
-  min-height: 125px;
-  border-right: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
-  margin-right: -1px;
+  min-height: 8.92rem;
+  border-right: 0.07rem solid #e0e0e0;
+  border-bottom: 0.07rem solid #e0e0e0;
+  margin-right: -0.07rem;
 }
 .calendar-day {
   text-align: center;
 }
 .outside {
-  background-color: #f7f7f7;
+  background-color: #f7f7f733;
 }
 </style>
