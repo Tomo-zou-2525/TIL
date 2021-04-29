@@ -1,20 +1,31 @@
 <template>
   <div>
     <div class="content">
-      <h2>カレンダー{{ currentDate }}</h2>
+      <h2>カレンダー{{ displayDate }}</h2>
       <div class="button-area">
         <button @click="setLastMonth" class="button">前の月</button>
         <button @click="setNextMonth" class="button">次の月</button>
       </div>
+
       <div class="calendar">
+        <div class="calendar-weekly">
+          <div class="calendar-weekday" v-for="n in 7" :key="n">
+            {{ weekDay(n - 1) }}
+          </div>
+        </div>
         <div
           class="calendar-weekly"
           v-for="(week, index) in calendars"
           :key="index"
         >
-          <div class="calendar-daily" v-for="(day, index) in week" :key="index">
+          <div
+            class="calendar-daily"
+            :class="{ outside: currentMonth !== day.month }"
+            v-for="(day, index) in week"
+            :key="index"
+          >
             <div class="calendar-day">
-              {{ day.date }}
+              {{ day.day }}
             </div>
           </div>
         </div>
@@ -50,13 +61,15 @@ export default {
       const weekNumber = Math.ceil(endDate.diff(startDate, "days") / 7);
 
       let calendars = [];
+      let calendarDate = this.getStartDate();
       for (let week = 0; week < weekNumber; week++) {
         let weekRow = [];
         for (let day = 0; day < 7; day++) {
           weekRow.push({
-            date: startDate.get("date"),
+            day: calendarDate.get("date"),
+            month: calendarDate.format("YYYY-MM"),
           });
-          startDate.add(1, "days");
+          calendarDate.add(1, "days");
         }
         calendars.push(weekRow);
       }
@@ -68,10 +81,22 @@ export default {
     setLastMonth() {
       this.currentDate = moment(this.currentDate).subtract(1, "month");
     },
+    weekDay(dayIndex) {
+      const week = ["日", "月", "火", "水", "木", "金", "土"];
+      return week[dayIndex];
+    },
   },
   computed: {
     calendars() {
       return this.getCalendar();
+    },
+    displayDate() {
+      return this.currentDate.format("YYYY[年]M[月]");
+    },
+    //背景色を分けるために使用するデータを定義：currentMonth
+    currentMonth() {
+      //formatしておく
+      return this.currentDate.format("YYYY-MM");
     },
   },
   mounted() {
@@ -103,6 +128,13 @@ export default {
   border-left: 1px solid #e0e0e0;
   /* background-color: black; */
 }
+.calendar-weekday {
+  flex: 1;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  margin-right: -1px;
+  text-align: center;
+}
 .calendar-daily {
   flex: 1;
   min-height: 125px;
@@ -112,5 +144,8 @@ export default {
 }
 .calendar-day {
   text-align: center;
+}
+.outside {
+  background-color: #f7f7f7;
 }
 </style>
