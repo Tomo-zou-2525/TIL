@@ -106,13 +106,28 @@ unko_list = ["unko","tinko","anko"]
 # 大体セットで用いられる
 # open関数・・・第一引数（読ませたいファイル）第二引数（モード）
 
-with open("./unko.txt", "r") as file:
-  print(file)
-  print(file.name)
-  print(file.mode)
-  print(file.read())
+# with open("./unko.txt", "r") as file:
+#   print(file)        #処置
+#   print(file.name)   #ファイル名
+#   print(file.mode)   #モード
+#   print(file.read()) #関数呼び出し
 # 処理の流れ
-# ①with open でファイルを指定
+# ①with open でファイルを指定  withは自動で処理の完了まで持っていってくれる
 # ②モードでr:読み取り w：書取り
 # ③as 変数名　で変数に格納
 # ④print で出力
+
+# class
+class Card:
+  def __init__(self, date, user_name): #self=this
+    self.date = date
+    self.user_name = user_name
+
+  def message(self):
+      return "この投稿は" + self.user_name + "さんが" + self.date + "に投稿しました"
+
+date_a = "2020-01-01"
+user_name_a = "tomoya"
+card_a = Card(date_a, user_name_a)
+
+print(card_a.message())
