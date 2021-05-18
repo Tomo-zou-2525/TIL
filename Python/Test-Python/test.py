@@ -130,4 +130,13 @@ date_a = "2020-01-01"
 user_name_a = "tomoya"
 card_a = Card(date_a, user_name_a)
 
+date_b = "2020-05-18"
+user_name_b = "manami"
+card_b = Card(date_b, user_name_b)
+
 print(card_a.message())
+print(card_b.message())
+
+# import
+import math #円周率を求めるモジュール
+print(math.pi)
