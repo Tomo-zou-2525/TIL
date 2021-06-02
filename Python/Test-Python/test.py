@@ -140,3 +140,11 @@ print(card_b.message())
 # import
 import math #円周率を求めるモジュール
 print(math.pi)
+
+# 外部モジュール
+# Numpy
+# Pandas
+# Flask
+# Django
+
+# pypi
