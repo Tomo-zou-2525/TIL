@@ -42,11 +42,28 @@
 
 scores = [10, 35, 84, 23, 2]
 
-for i in range(len(scores)):
-    print(scores[i])
-# また、省略として
-for i in scores:
-    print(i)
+# for i in range(len(scores)):
+#     print(scores[i])
+# # また、省略として
+# for i in scores:
+#     print(i)
 # のようにも書ける
 
 # for if 組み合わせ
+for score in scores:
+    if score >= 80:
+        print("Big")
+    elif score >= 20:
+        print("Medium")
+    else:
+        print("Unko")
+
+for score in scores:
+    if score >= 80:
+        print(str(score) + "点" + "合格")
+    else:
+        print(str(score) + "点" + "不合格")
+
+for x in range(1, 10):
+    for y in range(1, 10):
+        print(str(x) + "x" + str(y) + "=" + str(x * y))
